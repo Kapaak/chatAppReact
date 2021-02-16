@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import data from "./Data";
+import Tweets from "./Tweets/Tweets";
+import { AvatarGenerator } from "random-avatar-generator";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [userData, setUserData] = useState(data());
+	const [login, setLogin] = useState({
+		name: "Pavel Zapletal",
+		avatar: new AvatarGenerator().generateRandomAvatar("Pavel"),
+	});
+	return (
+		<div>
+			<p>my app!</p>
+			<img src={login.avatar} alt="" />
+			<p>name: {login.name}</p>
+			<Tweets userData={userData} setUserData={setUserData} login={login} />
+		</div>
+	);
 }
 
 export default App;
