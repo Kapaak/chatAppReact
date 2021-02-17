@@ -263,7 +263,12 @@ const Tweet = ({ login, el, setUserData, userData }) => {
 			</TweetActions>
 			{showComment ? (
 				<>
-					<CommentList login={login} el={el} />
+					<CommentList
+						login={login}
+						el={el}
+						userData={userData}
+						setUserData={setUserData}
+					/>
 					<TweetComment>
 						<img src={login.avatar} />
 						<div>
@@ -273,6 +278,7 @@ const Tweet = ({ login, el, setUserData, userData }) => {
 									ref={inputRef}
 									placeholder="add your comment"
 									type="text"
+									onKeyDown={e => (e.code === "Enter" ? submitButton() : null)}
 								/>
 								<button onClick={submitButton}>
 									<FontAwesomeIcon icon={faPaperPlane} />

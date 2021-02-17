@@ -2,19 +2,28 @@ import React, { useState } from "react";
 import data from "./Data";
 import Tweets from "./Tweets/Tweets";
 import { AvatarGenerator } from "random-avatar-generator";
+import Login from "./Login/Login";
 
 function App() {
 	const [userData, setUserData] = useState(data());
-	const [login, setLogin] = useState({
+	const [activeLogin, setActiveLogin] = useState({
 		name: "Pavel Zapletal",
 		avatar: new AvatarGenerator().generateRandomAvatar("Pavel"),
 	});
+	const [loginList, setLoginList] = useState([
+		{
+			name: "Pavel Zapletal",
+			avatar: new AvatarGenerator().generateRandomAvatar("Pavel"),
+		},
+	]);
 	return (
 		<div>
-			<p>my app!</p>
-			<img src={login.avatar} alt="" />
-			<p>name: {login.name}</p>
-			<Tweets userData={userData} setUserData={setUserData} login={login} />
+			<Login login={activeLogin} />
+			<Tweets
+				userData={userData}
+				setUserData={setUserData}
+				login={activeLogin}
+			/>
 		</div>
 	);
 }

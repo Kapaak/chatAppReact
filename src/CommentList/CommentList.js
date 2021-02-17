@@ -1,5 +1,5 @@
 import Comment from "../Comment/Comment";
-const CommentList = ({ login, el, userData }) => {
+const CommentList = ({ login, el, userData, setUserData }) => {
 	// const hasComments = () => {
 	// 	if (el.responses) {
 	// 		return (
@@ -15,7 +15,16 @@ const CommentList = ({ login, el, userData }) => {
 		<div>
 			{el.responses
 				? el.responses.map((response, index) => {
-						return <Comment response={response} login={login} key={index} />;
+						return (
+							<Comment
+								response={response}
+								login={login}
+								userData={userData}
+								key={index}
+								el={el}
+								setUserData={setUserData}
+							/>
+						);
 				  })
 				: null}
 		</div>
