@@ -35,7 +35,7 @@ const comment = ({ response, login, userData, el, setUserData }) => {
 	};
 	return (
 		<TweetComment>
-			<img src={login.avatar} />
+			<img src={login.avatar} alt={login.name} />
 			<div>
 				<p>{login.name}</p>
 				<p>{response}</p>

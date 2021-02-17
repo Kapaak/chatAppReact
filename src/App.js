@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import data from "./Data";
 import Tweets from "./Tweets/Tweets";
 import { AvatarGenerator } from "random-avatar-generator";
-import Login from "./Login/Login";
+import ActiveLogin from "./ActiveLogin/ActiveLogin";
 
 function App() {
 	const [userData, setUserData] = useState(data());
@@ -15,10 +15,22 @@ function App() {
 			name: "Pavel Zapletal",
 			avatar: new AvatarGenerator().generateRandomAvatar("Pavel"),
 		},
+		{
+			name: "Tomas Jedno",
+			avatar: new AvatarGenerator().generateRandomAvatar("Tomas"),
+		},
+		{
+			name: "Prokop Dvere",
+			avatar: new AvatarGenerator().generateRandomAvatar("Prokop"),
+		},
 	]);
 	return (
 		<div>
-			<Login login={activeLogin} />
+			<ActiveLogin
+				login={activeLogin}
+				loginList={loginList}
+				setActiveLogin={setActiveLogin}
+			/>
 			<Tweets
 				userData={userData}
 				setUserData={setUserData}
