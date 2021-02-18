@@ -130,15 +130,6 @@ const TweetComment = styled.div`
 				padding: 1rem 0;
 				border-bottom: 1px solid black;
 			}
-			input {
-				/* width: 12rem; */
-				/* transition: all 0.2s ease;
-
-				&:focus {
-					width: 17rem;
-					transition: all 0.3s ease;
-				} */
-			}
 			button {
 				cursor: pointer;
 				padding: 1rem 0.5rem;
@@ -163,7 +154,6 @@ const Tweet = ({ login, el, setUserData, userData }) => {
 				return {
 					...user,
 					likes: likes,
-					// saved: true,
 				};
 			} else return { ...user };
 		});
@@ -206,7 +196,14 @@ const Tweet = ({ login, el, setUserData, userData }) => {
 				if (user === el)
 					return {
 						...user,
-						responses: [...oldResponses, inputRef.current.value],
+						responses: [
+							...oldResponses,
+							{
+								name: login.name,
+								avatar: login.avatar,
+								response: inputRef.current.value,
+							},
+						],
 					};
 				else return { ...user };
 			});
@@ -215,7 +212,13 @@ const Tweet = ({ login, el, setUserData, userData }) => {
 				if (user === el)
 					return {
 						...user,
-						responses: [inputRef.current.value],
+						responses: [
+							{
+								name: login.name,
+								avatar: login.avatar,
+								response: inputRef.current.value,
+							},
+						],
 					};
 				else return { ...user };
 			});
@@ -229,7 +232,7 @@ const Tweet = ({ login, el, setUserData, userData }) => {
 	return (
 		<TweetWrapper>
 			<TweetHeader>
-				<img src={el.avatar} alt="" />
+				<img src={el.avatar} alt={el.name} />
 				<h2>{el.name}</h2>
 			</TweetHeader>
 			<TweetBody>
@@ -258,19 +261,14 @@ const Tweet = ({ login, el, setUserData, userData }) => {
 					onClick={saveHandler}
 					style={isSaved ? { color: "#9803BB" } : { color: "" }}
 				/>
-				{/* {isSaved ? <p>saved!</p> : <p>save</p>} */}
 				{saveOutput()}
 			</TweetActions>
+
 			{showComment ? (
 				<>
-					<CommentList
-						login={login}
-						el={el}
-						userData={userData}
-						setUserData={setUserData}
-					/>
+					<CommentList el={el} userData={userData} setUserData={setUserData} />
 					<TweetComment>
-						<img src={login.avatar} />
+						<img src={login.avatar} alt={login.name} />
 						<div>
 							<p>{login.name}</p>
 							<div>

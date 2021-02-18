@@ -21,7 +21,7 @@ const TweetComment = styled.div`
 		cursor: pointer;
 	}
 `;
-const comment = ({ response, login, userData, el, setUserData }) => {
+const comment = ({ response, userData, el, setUserData }) => {
 	const removeHandler = () => {
 		const newUserData = [...userData];
 		const getIndex = newUserData.findIndex(element => element === el);
@@ -35,10 +35,10 @@ const comment = ({ response, login, userData, el, setUserData }) => {
 	};
 	return (
 		<TweetComment>
-			<img src={login.avatar} alt={login.name} />
+			<img src={response.avatar} alt={response.name} />
 			<div>
-				<p>{login.name}</p>
-				<p>{response}</p>
+				<p>{response.name}</p>
+				<p>{response.response}</p>
 			</div>
 			<FontAwesomeIcon icon={faTimes} onClick={removeHandler} />
 		</TweetComment>
